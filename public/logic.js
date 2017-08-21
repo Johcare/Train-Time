@@ -1,12 +1,3 @@
-var config = {
-    apiKey: "AIzaSyCBxW2J5u6tF3rSxw-3n5u-s6wzavfpP0U",
-    authDomain: "traintime-f04d3.firebaseapp.com",
-    databaseURL: "https://traintime-f04d3.firebaseio.com",
-    projectId: "traintime-f04d3",
-    storageBucket: "traintime-f04d3.appspot.com",
-    messagingSenderId: "829507628400"
-};
-firebase.initializeApp(config);
 
 var database = firebase.database();
 
