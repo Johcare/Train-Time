@@ -1,18 +1,41 @@
 
+
+
+// $(document).on("ready", function() {
+    
+var config = {
+    apiKey: "AIzaSyCBxW2J5u6tF3rSxw-3n5u-s6wzavfpP0U",
+    authDomain: "traintime-f04d3.firebaseapp.com",
+    databaseURL: "https://traintime-f04d3.firebaseio.com",
+    projectId: "traintime-f04d3",
+    storageBucket: "traintime-f04d3.appspot.com",
+    messagingSenderId: "829507628400"
+};
+firebase.initializeApp(config);
+  
 var database = firebase.database();
 
 $('#addTrainBtn').on('click', function(event) {
     event.preventDefault();
-
-
+    console.log('adding train')
     var trainName = $('#trainNameInput').val().trim();
     var destin = $('#destination').val().trim();
     var firstTrain = moment($('#firstTrainInput').val().trim(), 'HH:mm').subtract(10, 'years').format('X');
     var freekan = $("#frequency").val().trim();
+
+
     console.log(firstTrain);
     alert('train added');
-    return false;
 
+    var train = {
+        trainName,
+        destin,
+        firstTrain,
+        freekan
+    }
+    database.ref().push(train)
+
+    
 
 });
 
@@ -31,10 +54,16 @@ database.ref().on('child_added', function(snapshot, prevChildkey) {
     var remainder = moment().diff(moment.unix(firstTrain), 'minutes') % freekan;
     var minutes = freekan - remainder;
     var arrival = moment().add(minutes, 'm').format('hh:mm A');
-
+    console.log("DATA");
     console.log(remainder);
     console.log(minutes);
     console.log(arrival);
 
-    $('#trainTable > tBody').append('<tr><td>' + trainName + '</td></tr>' + destin + '</td><td>' + freekan + '</td><td>' + arrival + '</td></td>' + minutes + '</td></tr>');
+    $('table').append('<tr><td>' + trainName + '</td><td>' + destin + '</td><td>' + freekan + '</td><td>' + arrival + '</td><td>' + minutes + '</td></tr>');
 });
+
+
+
+
+
+// });
